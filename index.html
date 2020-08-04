@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="Description" content="Enter your description here"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
-<title>Weather Forecast
-</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="Description" content="Enter your description here" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+  <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+  <title>Weather Forecast
+  </title>
 </head>
+
 <body>
   <!-- Created classes where retrieve data will be stored -->
   <div class="city"></div>
@@ -18,26 +20,50 @@
   <div class="wind"></div>
   <div class="humidity"></div>
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
-  <script type="text/javascript">
-  
-  // stored api key in a variable
-  var apiKey = "166a433c57516f51dfab1f7edaed8413";
-  </script>
-  
   <!-- class to store the temp in F if retrieved data is in kelvin -->
   <div class="tempF"></div>
-    <div class="container">
-        <nav class="navbar navbar-light justify-content-between" style="background-color: rgb(6, 88, 61);">
-            <a class="navbar-brand" style="color: rgb(228, 195, 7);" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Weather Dashboard</a>
-            <form class="form-inline">
-              <input class="form-control mr-sm-2" type="search" placeholder="Enter City" aria-label="Search">
-              <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-            </form>
-          </nav>
-    </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    // stored api key in a variable
+    var apiKey = "166a433c57516f51dfab1f7edaed8413";
+
+    // building a url to query the database
+    var queryUrl = "https://api.openweathermap.org/data/2.5/weather?" + "q=London,Burundi&appid=" + apiKey;
+
+    // AJAX call to the API
+    $.ajax({
+      url: queryUrl,
+      method: "GET"
+    })
+
+    // we store all of the retrieved data inside of an object
+    .then(function(response) {
+      // console log the response
+      console.log(response);
+
+      // logging the queryUrl
+      console.log(queryUrl);
+
+      // Transfer the content to html
+      $(".city").html("<h1> "+ response.name + " Weather Details </h1>");
+    });
+  </script>
+
+  <div class="container">
+    <nav class="navbar navbar-light justify-content-between" style="background-color: rgb(6, 88, 61);">
+      <a class="navbar-brand" style="color: rgb(228, 195, 7);"
+        style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Weather
+        Dashboard</a>
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Enter City" aria-label="Search">
+        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </nav>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
+
 </html>
