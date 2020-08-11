@@ -25,5 +25,5 @@ api key used in this program -> e2f589323ac21fe7c4597c290fc12523 </p>
 <p> In this file we worked on the style elements of the dashboard. 
 
 # screenshot of the weather dashboard
-![alt text](./assets/screenshot.png "working screenshot of the weather dashboard")
+![alt text](./assets/screenshot.png "Screenshot of the weather dashboard")
 
