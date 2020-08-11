@@ -41,9 +41,19 @@ $(document).ready(function () {
 
         });
     }   
+    // a function to display search history
+    function displaySearchHistory() {
+        $("#search-history").empty();
+        searchHistory.forEach(function (city) {
+            var historyItem = $("<li>");
+            historyItem.addClass("list-group-item btn btn-light");
+            historyItem.text(city);
+            $("#search-history").prepend(historyItem);
+        });
+        $(".btn").click(cityCurrentWeather);
+    }
 
-    // a function to grab 5 day data
-
+    
 
 
 }); 
