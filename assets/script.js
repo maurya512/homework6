@@ -9,6 +9,8 @@ $(document).ready(function () {
     var searchHistory = JSON.parse(localStorage.getItem("cities")) === null ? []: JSON.parse(localStorage.getItem("cities"));
     console.log(searchHistory);
 
+    displaySearchHistory();
+
     // create a function to display current weather at a city of user's choice
 
     function cityCurrentWeather() {
@@ -22,23 +24,22 @@ $(document).ready(function () {
 
         // populate weatherUrl with the link and city query along with api keys
         weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + apiKey;
+        
+        if(searchHistory.indexOf(city) === -1) {
+            searchHistory.push(city);
+        }
 
-        $.ajax({
-            url: weatherUrl,
-            method: "GET"
-        }).then(function(response ){
-            console.log(response);
+        localStorage.setItem("cities", JSON.stringify(searchHistory));
 
-            // grab temp from the query and store it inside a variable
-            var temp = (response.main.temp - 273.15) * (9 / 5) + 32;
-            var windSpeed = (response.wind.speed) * 2.24;
+        $.getJSON(weatherUrl, function (json) {
+            let temp = (json.main.temp - 273.15) * (9 / 5) + 32;
+            let windspeed = json.wind.speed * 2.237;
 
-            $("#current-city").response.name + " " + currentDate;
-            $("#city-img").attr("src", "https://openweathermap.org/img/w/" + JSON.weather[0].icon + ".png");
-            $("#temp").text(temp.toFixed(2) + "F");
-            $("#humidity").response.main.humidity + "%";
-            $("#wind-speed").response.main.windspeed.toFixed(2) + " " + "mph";
-
+            $("#current-city").text(json.name + " " + currentDate);
+            $("#weather-img").attr("src", "https://openweathermap.org/img/w/" + json.weather[0].icon + ".png");
+            $("#temperature").text(temp.toFixed(2) + "°F");
+            $("#humidity").text(json.main.humidity + "%");
+            $("#windspeed").text(windspeed.toFixed(2) + " " + "mph");
         });
     }   
     // a function to display search history
