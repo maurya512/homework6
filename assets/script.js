@@ -33,7 +33,17 @@ $(document).ready(function () {
             var temp = (response.main.temp - 273.15) * (9 / 5) + 32;
             var windSpeed = (response.wind.speed) * 2.24;
 
-        })
+            $("#current-city").response.name + " " + currentDate;
+            $("#city-img").attr("src", "https://openweathermap.org/img/w/" + JSON.weather[0].icon + ".png");
+            $("#temp").text(temp.toFixed(2) + "F");
+            $("#humidity").response.main.humidity + "%";
+            $("#wind-speed").response.main.windspeed.toFixed(2) + " " + "mph";
+
+        });
     }   
+
+    // a function to grab 5 day data
+
+
 
 }); 
