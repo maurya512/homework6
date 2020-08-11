@@ -53,7 +53,14 @@ $(document).ready(function () {
         $(".btn").click(cityCurrentWeather);
     }
 
-    
-
+    // a function to clear history
+    function clearSearchHistory() {
+        $("#search-history").empty();
+        searchHistory = [];
+        localStorage.setItem("cities", JSON.stringify(searchHistory));
+    }
+    // add event listeners on all button classes
+    $("#clear-history").click(clearSearchHistory);
+    $("#search-city").click(displaySearchHistory);
 
 }); 
